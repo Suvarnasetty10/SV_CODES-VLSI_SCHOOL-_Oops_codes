@@ -34,7 +34,19 @@ endmodule
 # KERNEL: 800
 # KERNEL: 40,80
 
-    
-    
+
+//Suppose  the super.new() i splaced in this way
+function new(int a,int b);
+  id=a;
+  roll=b;
+  super.new(800);
+  $display("%0d,%0d",id,roll);
+endfunction
+
+//output: it creates the error as
+In SystemVerilog, super.new() must be the first statement inside the child class constructor.
+Because it inherits the propertirs from the parent class , so we should initialze the parent class first and then the child class.
+You cannot initialize id and roll before calling the parent constructor.
+
   
   
