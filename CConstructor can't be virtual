@@ -1,0 +1,29 @@
+//Constructor cant be virtual and static . it causes errors.it can be local and protected.
+//Reason can be found soon.
+class baseclass;
+  int data;
+     virtual function new(int data);
+    this.data=data;
+    $display("[Base class] data=%0d",data);
+  endfunction
+endclass
+
+class childclass extends baseclass;
+  int id;
+  function new(int data ,int id);
+    super.new(45678);
+    this.id=id;
+    $display("data=%0d,id=%0d",data,id);
+  endfunction
+endclass
+
+module tb;
+  initial begin 
+    childclass C1=new(45678,431);
+    baseclass B1= C1;
+  end
+endmodule
+//output:
+Error:
+ virtual function new ();                    |
+ ncvlog: *E,BADQAL (testbench.sv,6|21): Lifetime or qualifier(s) 'virtual' not allowed before function new declaration.
